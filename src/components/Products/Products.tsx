@@ -1,4 +1,5 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import React, { useEffect, useState, ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 
 interface Product {
   id: number;
@@ -15,7 +16,7 @@ interface Product {
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>("");
   const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,12 +26,12 @@ const Products: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://fakestoreapi.com/products');
+        const response = await fetch("https://fakestoreapi.com/products");
         const data: Product[] = await response.json();
         setProducts(data);
         setDisplayedProducts(data); // Initially, display all products
       } catch (error) {
-        console.error('Some error occurred', error);
+        console.error("Some error occurred", error);
       }
     };
     fetchProducts();
@@ -51,33 +52,36 @@ const Products: React.FC = () => {
   return (
     <>
       <section className="search w-[90%] mx-auto">
-        <div className='flex justify-center gap-2 my-4'>
+        <div className="flex justify-center gap-2 my-4">
           <input
             type="text"
-            placeholder='search your favourite items'
-            className='w-[60%] px-2 border-2 border-slate-500 outline-none'
+            placeholder="search your favourite items"
+            className="w-[60%] p-2 border-slate-500 outline-none bg-slate-700/10 text-slate-500"
             value={searchText}
             onChange={handleSearchChange}
           />
         </div>
       </section>
-      <section className='w-[90%] mx-auto'>
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2'>
+      <section className="w-[90%] mx-auto">
+        <h2 className="mb-8 text-6xl font-bold text-center">Products</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2">
           {displayedProducts.map((product) => (
             <div
               key={product.id}
-              className='grid grid-cols-1 gap-2 p-2 border-2'
+              className="grid grid-cols-1 gap-2 p-2 mb-6 shadow-lg"
             >
               <div>
-                <img src={product.image} alt='' className='w-[80%] h-40' />
+                <img src={product.image} alt="" className="w-[80%] h-40" />
               </div>
-              <div className='object-cover text-2xl font-semibold'>
-                {product.title.length > 30
-                  ? product.title.slice(0, 30) + '...'
-                  : product.title}
+              <div className="object-cover text-2xl font-semibold">
+                <Link to={`product/${product.id}`}>
+                  {product.title.length > 30
+                    ? product.title.slice(0, 30) + "..."
+                    : product.title}
+                </Link>
               </div>
-              <div className='text-xl font-semibold'>{product.price}</div>
-              <div>{product.description.slice(0, 100) + '...'}</div>
+              <div className="text-xl font-semibold">{product.price}</div>
+              <div>{product.description.slice(0, 100) + "..."}</div>
               <div>{product.category}</div>
               <div>{product.rating.rate}</div>
               <div>{product.rating.count}</div>
