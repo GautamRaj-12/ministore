@@ -6,6 +6,7 @@ interface Product {
   title: string;
   description: string;
   price: number;
+  image: string;
   category: string;
   rating: {
     rate: number;
@@ -46,11 +47,12 @@ const Product: React.FC = () => {
 
   return (
     <>
-      <section>
-        <div>
-          <p>{product.title}</p>
-          <p>{product.description}</p>
-          <p>{product.price}</p>
+      <section className="w-[90%] mx-auto mt-5 flex justify-center">
+        <div className="flex flex-col items-center justify-center max-w-3xl gap-4 p-2 shadow-lg">
+          <div><img src={product.image} alt="" className="h-60"/></div>
+          <h2 className="text-3xl font-semibold">{product.title}</h2>
+          <p className="text-lg">{product.description}</p>
+          <p className="text-2xl font-bold">{product.price}</p>
           <p>{product.category}</p>
           <p>{product.rating?.rate}</p>
           <p>{product.rating?.count}</p>
