@@ -51,12 +51,12 @@ const Products: React.FC = () => {
 
   return (
     <>
-      <section className="search w-[90%] mx-auto">
+      <section className="search w-[90%] mx-auto" id="products">
         <div className="flex justify-center gap-2 my-4">
           <input
             type="text"
             placeholder="search your favourite items"
-            className="w-[60%] p-2 border-slate-500 outline-none bg-slate-700/10 text-slate-500"
+            className="w-[60%] p-2 border-slate-500 outline-none bg-slate-700/10 dark:text-slate-200 text-slate-500"
             value={searchText}
             onChange={handleSearchChange}
           />
@@ -64,13 +64,13 @@ const Products: React.FC = () => {
       </section>
       <section className="w-[90%] mx-auto">
         <h2 className="mb-8 text-6xl font-bold text-center">Products</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-4 sm:grid-cols-2">
           {displayedProducts.map((product) => (
             <div
               key={product.id}
-              className="grid grid-cols-1 gap-2 p-2 mb-6 shadow-lg"
+              className="grid grid-cols-1 gap-4 p-4 mb-6 rounded-md shadow-2xl border-slate-400 dark:bg-slate-800"
             >
-              <div>
+              <div className="flex justify-center">
                 <img src={product.image} alt="" className="w-[80%] h-40" />
               </div>
               <div className="object-cover text-2xl font-semibold">
@@ -80,11 +80,15 @@ const Products: React.FC = () => {
                     : product.title}
                 </Link>
               </div>
-              <div className="text-xl font-semibold">{product.price}</div>
+              <div className="text-xl font-semibold text-rose-500">{`$${product.price}`}</div>
               <div>{product.description.slice(0, 100) + "..."}</div>
-              <div>{product.category}</div>
-              <div>{product.rating.rate}</div>
-              <div>{product.rating.count}</div>
+              <div>
+                <span className="px-4 py-1 italic font-medium rounded-full bg-rose-500/90">
+                  {product.category}
+                </span>
+              </div>
+              <div className="font-medium">Rating: {product.rating.rate}</div>
+              <div>{product.rating.count} reviews</div>
             </div>
           ))}
         </div>

@@ -7,13 +7,13 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import { ThemeContextProvider } from "./contexts/ThemeContext.ts";
-import Products from "./components/Products/Products.tsx";
 import Product from "./components/Product/Product.tsx";
+import Home from "./pages/Home.tsx";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<Home />} />
         <Route path="/product/:productId" element={<Product />} />
       </>
     )
