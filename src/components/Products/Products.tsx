@@ -59,7 +59,7 @@ const Products: React.FC = () => {
           <input
             type='text'
             placeholder='search your favourite items'
-            className='w-[60%] p-2 border-slate-500 outline-none bg-slate-700/10 dark:text-slate-200 text-slate-500'
+            className='md:w-[60%] w-[100%] p-2 border-slate-500 outline-none bg-slate-700/10 dark:text-slate-200 text-slate-500'
             value={searchText}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setSearchText(e.target.value)

@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
             Ministore
           </h2>
         </Link>
-        <ul className='flex gap-10 text-xl font-semibold'>
+        <ul className='flex gap-10 px-1 text-xl font-semibold md:px-0'>
           <Link to='/'>
             <li>Home</li>
           </Link>
