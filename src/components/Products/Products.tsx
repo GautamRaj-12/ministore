@@ -21,14 +21,11 @@ const Products: React.FC = () => {
   const [searchText, setSearchText] = useState<string>('');
   const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
 
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  };
-
   const dispatch = useDispatch();
-  const handleAddItem = (product) => {
+  const handleAddItem = (product: Product) => {
     dispatch(addItem(product));
   };
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -64,7 +61,9 @@ const Products: React.FC = () => {
             placeholder='search your favourite items'
             className='w-[60%] p-2 border-slate-500 outline-none bg-slate-700/10 dark:text-slate-200 text-slate-500'
             value={searchText}
-            onChange={handleSearchChange}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSearchText(e.target.value)
+            }
           />
         </div>
       </section>
