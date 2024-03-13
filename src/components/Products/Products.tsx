@@ -24,6 +24,7 @@ const Products: React.FC = () => {
   const dispatch = useDispatch();
   const handleAddItem = (product: Product) => {
     dispatch(addItem(product));
+    alert('Added to cart');
   };
 
   useEffect(() => {
