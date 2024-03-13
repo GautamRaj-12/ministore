@@ -16,9 +16,9 @@ const Navbar: React.FC = () => {
 
   return (
     <header className='p-5 shadow-xl'>
-      <nav className='w-[90%] mx-auto flex justify-between items-center flex-wrap'>
+      <nav className='w-[90%] mx-auto flex justify-between items-center md:flex-row flex-col gap-2'>
         <Link to='/'>
-          <h2 className='text-4xl font-semibold font-[pacifico] tracking-wide text-center'>
+          <h2 className='text-4xl font-semibold font-[pacifico] tracking-wide'>
             Ministore
           </h2>
         </Link>
@@ -33,8 +33,10 @@ const Navbar: React.FC = () => {
             <li>Products</li>
           </Link>
           <li>
-            <i className='text-xl fa-solid fa-cart-shopping'></i>
-            {cartItems.length}
+            <span className='flex'>
+              <i className='mr-1 text-xl fa-solid fa-cart-shopping'></i>
+              <span>{cartItems.length}</span>
+            </span>
           </li>
           <div className='flex items-center justify-center cursor-pointer'>
             {themeMode === 'dark' ? (
