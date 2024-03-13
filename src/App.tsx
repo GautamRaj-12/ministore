@@ -1,43 +1,47 @@
-import { useState, useEffect } from "react";
-import "./App.css";
+import { useState, useEffect } from 'react';
+import './App.css';
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-} from "react-router-dom";
-import { ThemeContextProvider } from "./contexts/ThemeContext.ts";
-import Product from "./components/Product/Product.tsx";
-import Home from "./pages/Home.tsx";
+} from 'react-router-dom';
+import { ThemeContextProvider } from './contexts/ThemeContext.ts';
+import Product from './components/Product/Product.tsx';
+import Home from './pages/Home.tsx';
+import { Provider } from 'react-redux';
+import store from './app/store.ts';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Home />} />
-        <Route path="/product/:productId" element={<Product />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/product/:productId' element={<Product />} />
       </>
     )
   );
-  const [themeMode, setThemeMode] = useState("light");
+  const [themeMode, setThemeMode] = useState('dark');
   const lightTheme = () => {
-    setThemeMode("light");
+    setThemeMode('light');
   };
   const darkTheme = () => {
-    setThemeMode("dark");
+    setThemeMode('dark');
   };
 
   useEffect(() => {
-    const htmlElement = document.querySelector("html");
+    const htmlElement = document.querySelector('html');
     if (htmlElement) {
-      htmlElement.classList.remove("light", "dark");
+      htmlElement.classList.remove('light', 'dark');
       htmlElement.classList.add(themeMode);
     }
   }, [themeMode]);
   return (
     <>
-      <ThemeContextProvider value={{ themeMode, lightTheme, darkTheme }}>
-        <RouterProvider router={router} />
-      </ThemeContextProvider>
+      <Provider store={store}>
+        <ThemeContextProvider value={{ themeMode, lightTheme, darkTheme }}>
+          <RouterProvider router={router} />
+        </ThemeContextProvider>
+      </Provider>
     </>
   );
 }
