@@ -6,11 +6,11 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
-import { ThemeContextProvider } from './contexts/ThemeContext.ts';
-import Product from './components/Product/Product.tsx';
-import Home from './pages/Home.tsx';
+import { ThemeContextProvider } from './contexts/ThemeContext.js';
+import Product from './components/Product/Product.jsx';
+import Home from './pages/Home.jsx';
 import { Provider } from 'react-redux';
-import store from './app/store.ts';
+import store from './app/store.js';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(

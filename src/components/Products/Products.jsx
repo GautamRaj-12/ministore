@@ -3,26 +3,13 @@ import { Link } from 'react-router-dom';
 import { addItem } from '../../app/cartSlice';
 import { useDispatch } from 'react-redux';
 
-interface Product {
-  id: number;
-  title: string;
-  image: string;
-  price: number;
-  description: string;
-  category: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
-
-const Products: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [searchText, setSearchText] = useState<string>('');
-  const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
+const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [displayedProducts, setDisplayedProducts] = useState([]);
 
   const dispatch = useDispatch();
-  const handleAddItem = (product: Product) => {
+  const handleAddItem = (product) => {
     dispatch(addItem(product));
     alert('Added to cart');
   };
@@ -31,7 +18,7 @@ const Products: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch('https://fakestoreapi.com/products');
-        const data: Product[] = await response.json();
+        const data = await response.json();
         setProducts(data);
         setDisplayedProducts(data); // Initially, display all products
       } catch (error) {
@@ -62,9 +49,7 @@ const Products: React.FC = () => {
             placeholder='search your favourite items'
             className='md:w-[60%] w-[100%] p-2 border-slate-500 outline-none bg-slate-700/10 dark:text-slate-200 text-slate-500'
             value={searchText}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setSearchText(e.target.value)
-            }
+            onChange={(e) => setSearchText(e.target.value)}
           />
         </div>
       </section>
