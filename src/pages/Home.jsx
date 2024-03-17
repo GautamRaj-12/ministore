@@ -4,7 +4,6 @@ import Products from "../components/Products/Products";
 const Home = () => {
   return (
     <>
-      <Navbar />
       <Products />
     </>
   );

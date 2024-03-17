@@ -6,7 +6,6 @@ const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   return (
     <>
-      <Navbar />
       {cartItems.length <= 0 ? (
         <div className="mt-4 text-6xl text-center">Cart is empty</div>
       ) : (

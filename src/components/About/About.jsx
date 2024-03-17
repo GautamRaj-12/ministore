@@ -3,7 +3,6 @@ import Navbar from "../Navbar/Navbar";
 const About = () => {
   return (
     <>
-      <Navbar />
       <section className="w-[90%] mx-auto mt-4">
         <div className="mb-4 text-3xl text-center font-[pacifico] tracking-wide">
           About Us
