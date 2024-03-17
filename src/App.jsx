@@ -1,37 +1,39 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-} from 'react-router-dom';
-import { ThemeContextProvider } from './contexts/ThemeContext.js';
-import Product from './components/Product/Product.jsx';
-import Home from './pages/Home.jsx';
-import { Provider } from 'react-redux';
-import store from './app/store.js';
+} from "react-router-dom";
+import { ThemeContextProvider } from "./contexts/ThemeContext.js";
+import Product from "./components/Product/Product.jsx";
+import Home from "./pages/Home.jsx";
+import { Provider } from "react-redux";
+import store from "./app/store.js";
+import Cart from "./components/Cart/Cart.jsx";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path='/' element={<Home />} />
-        <Route path='/product/:productId' element={<Product />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:productId" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
       </>
     )
   );
-  const [themeMode, setThemeMode] = useState('dark');
+  const [themeMode, setThemeMode] = useState("dark");
   const lightTheme = () => {
-    setThemeMode('light');
+    setThemeMode("light");
   };
   const darkTheme = () => {
-    setThemeMode('dark');
+    setThemeMode("dark");
   };
 
   useEffect(() => {
-    const htmlElement = document.querySelector('html');
+    const htmlElement = document.querySelector("html");
     if (htmlElement) {
-      htmlElement.classList.remove('light', 'dark');
+      htmlElement.classList.remove("light", "dark");
       htmlElement.classList.add(themeMode);
     }
   }, [themeMode]);
