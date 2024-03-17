@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 
 const Cart = () => {

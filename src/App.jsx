@@ -17,16 +17,15 @@ import Layout from "./Layout.jsx";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <>
-        <Route path="/" element={<Layout />}>
-          <Route path="" element={<Home />} />
-          <Route path="product/:productId" element={<Product />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="about" element={<About />} />
-        </Route>
-      </>
+      <Route path="/" element={<Layout />}>
+        <Route path="" element={<Home />} />
+        <Route path="product/:productId" element={<Product />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="about" element={<About />} />
+      </Route>
     )
   );
+
   const [themeMode, setThemeMode] = useState("dark");
   const lightTheme = () => {
     setThemeMode("light");
