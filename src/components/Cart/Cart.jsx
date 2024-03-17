@@ -6,14 +6,18 @@ const Cart = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-4 w-[90%] mx-auto">
-        {cartItems.map((item) => (
-          <div key={item.id} className="flex justify-between mb-2">
-            <p>{item.title}</p>
-            <p>{item.price}</p>
-          </div>
-        ))}
-      </div>
+      {cartItems.length <= 0 ? (
+        <div className="mt-4 text-6xl text-center">Cart is empty</div>
+      ) : (
+        <div className="mt-4 w-[90%] mx-auto">
+          {cartItems.map((item) => (
+            <div key={item.id} className="flex justify-between mb-2">
+              <p>{item.title}</p>
+              <p>{item.price}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };
