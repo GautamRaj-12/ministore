@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import useTheme from "../../contexts/ThemeContext";
 import { useSelector } from "react-redux";
-import store from "../../app/store";
 
 const Navbar = () => {
   const { themeMode, lightTheme, darkTheme } = useTheme();
