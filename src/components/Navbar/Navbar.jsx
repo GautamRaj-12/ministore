@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <>
       <header className="p-5 shadow-xl">
-        <nav className="w-[90%] mx-auto flex justify-between items-center flex-wrap">
+        <nav className="w-[90%] mx-auto flex md:justify-between justify-center items-center flex-wrap gap-3">
           <Link to="/">
             <h2 className="text-4xl font-semibold font-[pacifico] tracking-wide text-center">
               Ministore
@@ -34,8 +34,9 @@ const Navbar = () => {
             </Link>
             <Link to="/cart">
               <li>
-                <i className="text-xl fa-solid fa-cart-shopping"></i>
-                {cartItems.length}
+                <i className="flex gap-2 text-xl fa-solid fa-cart-shopping">
+                  {cartItems.length}
+                </i>
               </li>
             </Link>
             <div className="flex items-center justify-center cursor-pointer">
