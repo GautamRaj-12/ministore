@@ -1,18 +1,22 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { addItem } from '../../app/cartSlice';
 import { useDispatch } from 'react-redux';
+import useDebounce from '../../hooks/useDebounce';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [displayedProducts, setDisplayedProducts] = useState([]);
+  const [debounceCounter, setDebounceCounter] = useState(0);
 
   const dispatch = useDispatch();
   const handleAddItem = (product) => {
     dispatch(addItem(product));
     alert('Added to cart');
   };
+
+  const debouncedSearchText = useDebounce(searchText, 500); // Debounce the search text
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -29,16 +33,16 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
-    const searchedData = () => {
-      const filteredProducts = products.filter((product) =>
-        product.title.toLowerCase().includes(searchText.toLowerCase())
-      );
-      console.log(filteredProducts);
-      setDisplayedProducts(filteredProducts);
-    };
+    console.log('Debounce Counter:', debounceCounter);
+    setDebounceCounter((prevCounter) => prevCounter + 1);
+  }, [debouncedSearchText]);
 
-    searchedData();
-  }, [searchText, products]);
+  useEffect(() => {
+    const filteredProducts = products.filter((product) =>
+      product.title.toLowerCase().includes(debouncedSearchText.toLowerCase())
+    );
+    setDisplayedProducts(filteredProducts);
+  }, [debouncedSearchText, products]);
 
   return (
     <>
