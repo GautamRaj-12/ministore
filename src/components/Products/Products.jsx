@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchProducts } from "../../utils/apiCall";
 import useDebounce from "../../hooks/useDebounce";
 import ProductCard from "../ProductCard/ProductCard";
+import Shimmer from "../Shimmer/Shimmer";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -48,17 +49,21 @@ const Products = () => {
       <section className="w-[90%] mx-auto">
         <h2 className="mb-8 text-6xl font-bold text-center">Products</h2>
         <div className="grid grid-cols-1 gap-2 shadow-lg md:grid-cols-4 sm:grid-cols-2">
-          {displayedProducts.map((product) => (
-            <ProductCard
-              id={product.id}
-              image={product.image}
-              title={product.title}
-              price={product.price}
-              category={product.category}
-              rate={product.rating.rate}
-              count={product.rating.count}
-            />
-          ))}
+          {displayedProducts.length > 0
+            ? displayedProducts.map((product) => (
+                <ProductCard
+                  id={product.id}
+                  image={product.image}
+                  title={product.title}
+                  price={product.price}
+                  category={product.category}
+                  rate={product.rating.rate}
+                  count={product.rating.count}
+                />
+              ))
+            : Array.from({ length: 10 }).map((_, index) => (
+                <Shimmer key={index} />
+              ))}
         </div>
       </section>
     </>
