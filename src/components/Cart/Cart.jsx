@@ -1,9 +1,21 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Modal from "../Modal/Modal";
+import { useState } from "react";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleCheckoutClick = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       <div className="flex items-center justify-center gap-4 mt-4">
@@ -38,12 +50,21 @@ const Cart = () => {
             <p className="">{totalPrice}</p>
           </div>
           <div className="flex justify-center mt-5">
-            <button className="flex justify-center p-2 rounded w-30 bg-rose-500/90">
+            <button
+              className="flex justify-center p-2 rounded w-30 bg-rose-500/90"
+              onClick={handleCheckoutClick}
+            >
               Checkout
             </button>
           </div>
         </div>
       )}
+      <Modal
+        text={"Order Processed, Thank You"}
+        btnText={"Ok"}
+        visibility={modalOpen ? "flex" : "hidden"}
+        closeModal={closeModal}
+      />
     </>
   );
 };
