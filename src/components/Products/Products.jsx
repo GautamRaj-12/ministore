@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { addItem } from "../../app/cartSlice";
 import { useDispatch } from "react-redux";
+import { fetchProducts } from "../../utils/apiCall";
 import useDebounce from "../../hooks/useDebounce";
 
 const Products = () => {
@@ -19,17 +20,12 @@ const Products = () => {
   const debouncedSearchText = useDebounce(searchText, 500); // Debounce the search text
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("https://fakestoreapi.com/products");
-        const data = await response.json();
-        setProducts(data);
-        setDisplayedProducts(data); // Initially, display all products
-      } catch (error) {
-        console.error("Some error occurred", error);
-      }
+    const fetchedProducts = async () => {
+      const data = await fetchProducts();
+      console.log(data);
+      setProducts(data);
     };
-    fetchProducts();
+    fetchedProducts();
   }, []);
 
   useEffect(() => {

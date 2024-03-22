@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { fetchProductsById } from "../../utils/apiCall";
 
 const Product = () => {
   const { productId } = useParams();
@@ -11,16 +12,7 @@ const Product = () => {
         if (!productId) {
           throw new Error("Product ID not provided");
         }
-
-        const response = await fetch(
-          `https://fakestoreapi.com/products/${productId}`
-        );
-        if (!response.ok) {
-          throw new Error("Product not found");
-        }
-
-        const data = await response.json();
-        console.log(data);
+        const data = await fetchProductsById(productId);
         setProduct(data);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -42,7 +34,7 @@ const Product = () => {
             <img src={product.image} alt="" className="h-60" />
           </div>
           <h2 className="text-3xl font-semibold">{product.title}</h2>
-          <p className="text-lg">{product.description}</p>
+          {/* <p className="text-lg">{product.description}</p> */}
           <p className="text-2xl font-bold">{product.price}</p>
           <p>{product.category}</p>
           <p>{product.rating?.rate}</p>
