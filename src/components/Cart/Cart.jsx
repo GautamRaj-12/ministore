@@ -24,7 +24,7 @@ const Cart = () => {
           </p>
         </div>
       ) : (
-        <div className="mt-8 w-[50%] mx-auto dark:bg-slate-800 bg-white shadow-lg p-5">
+        <div className="mt-8 w-[95%] md:w-[50%] mx-auto dark:bg-slate-800 bg-white shadow-lg p-5">
           {cartItems.map((item) => (
             <div key={item.id} className="flex justify-between mb-2">
               <Link to={`/product/${item.id}`}>
