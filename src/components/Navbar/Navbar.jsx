@@ -32,10 +32,11 @@ const Navbar = () => {
               <li>Products</li>
             </Link>
             <Link to="/cart">
-              <li>
-                <i className="flex gap-2 text-xl fa-solid fa-cart-shopping">
-                  {cartItems.length}
-                </i>
+              <li className="relative">
+                <i className="flex gap-2 text-xl fa-solid fa-cart-shopping"></i>
+                <span className="absolute flex items-center justify-center w-4 h-4 text-sm rounded-full -right-2 top-3 bg-rose-500">
+                  <p>{cartItems.length}</p>
+                </span>
               </li>
             </Link>
             <div className="flex items-center justify-center cursor-pointer">
