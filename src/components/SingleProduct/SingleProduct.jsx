@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchProductsById } from "../../utils/apiCall";
+import ProductCard from "../ProductCard/ProductCard";
 
-const Product = () => {
+const SingleProduct = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -29,20 +30,18 @@ const Product = () => {
   return (
     <>
       <section className="w-[90%] mx-auto mt-5 flex justify-center">
-        <div className="flex flex-col items-center justify-center max-w-lg gap-4 p-2 shadow-lg dark:bg-slate-800">
-          <div>
-            <img src={product.image} alt="" className="h-60" />
-          </div>
-          <h2 className="text-3xl font-semibold">{product.title}</h2>
-          {/* <p className="text-lg">{product.description}</p> */}
-          <p className="text-2xl font-bold">{product.price}</p>
-          <p>{product.category}</p>
-          <p>{product.rating?.rate}</p>
-          <p>{product.rating?.count}</p>
-        </div>
+        <ProductCard
+          id={product.id}
+          image={product.image}
+          title={product.title}
+          price={product.price}
+          category={product.category}
+          rate={product.rating.rate}
+          count={product.rating.count}
+        />
       </section>
     </>
   );
 };
 
-export default Product;
+export default SingleProduct;

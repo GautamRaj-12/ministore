@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { addItem } from "../../app/cartSlice";
-import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../utils/apiCall";
 import useDebounce from "../../hooks/useDebounce";
+import ProductCard from "../ProductCard/ProductCard";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [displayedProducts, setDisplayedProducts] = useState([]);
-  const [debounceCounter, setDebounceCounter] = useState(0);
-
-  const dispatch = useDispatch();
-  const handleAddItem = (product) => {
-    dispatch(addItem(product));
-    alert("Added to cart");
-  };
+  // const [debounceCounter, setDebounceCounter] = useState(0);
 
   const debouncedSearchText = useDebounce(searchText, 500); // Debounce the search text
 
   useEffect(() => {
     const fetchedProducts = async () => {
       const data = await fetchProducts();
-      console.log(data);
+      // console.log(data);
       setProducts(data);
     };
     fetchedProducts();
   }, []);
 
-  useEffect(() => {
-    console.log("Debounce Counter:", debounceCounter);
-    setDebounceCounter((prevCounter) => prevCounter + 1);
-  }, [debouncedSearchText]);
+  // useEffect(() => {
+  //   console.log("Debounce Counter:", debounceCounter);
+  //   setDebounceCounter((prevCounter) => prevCounter + 1);
+  // }, [debouncedSearchText]);
 
   useEffect(() => {
     const filteredProducts = products.filter((product) =>
@@ -57,41 +49,15 @@ const Products = () => {
         <h2 className="mb-8 text-6xl font-bold text-center">Products</h2>
         <div className="grid grid-cols-1 gap-2 shadow-lg md:grid-cols-4 sm:grid-cols-2">
           {displayedProducts.map((product) => (
-            <div
-              key={product.id}
-              className="grid grid-cols-1 gap-4 p-4 mb-6 rounded-md shadow-2xl border-slate-400 dark:bg-slate-800"
-            >
-              <div className="flex justify-center">
-                <img src={product.image} alt="" className="w-[80%] h-36" />
-              </div>
-              <div className="object-cover text-xl font-semibold text-center">
-                <Link to={`product/${product.id}`}>
-                  {product.title.length > 20
-                    ? product.title.slice(0, 20) + "..."
-                    : product.title}
-                </Link>
-              </div>
-              <div className="text-center">
-                <span className="text-sm text-slate-400 italics">
-                  {product.category}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <div className="font-medium">Rating: {product.rating.rate}</div>
-                <div className="font-medium">
-                  {product.rating.count} reviews
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="text-xl font-semibold text-center text-rose-500">{`$${product.price}`}</div>
-                <button
-                  className="flex justify-center p-2 rounded w-30 bg-rose-500/90"
-                  onClick={() => handleAddItem(product)}
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
+            <ProductCard
+              id={product.id}
+              image={product.image}
+              title={product.title}
+              price={product.price}
+              category={product.category}
+              rate={product.rating.rate}
+              count={product.rating.count}
+            />
           ))}
         </div>
       </section>
