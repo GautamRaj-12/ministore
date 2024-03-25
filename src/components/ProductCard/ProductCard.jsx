@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { addItem } from "../../app/cartSlice";
 import { useDispatch } from "react-redux";
+import CartNotification from "../CartNotification/CartNotification";
 
 const ProductCard = (props) => {
   const dispatch = useDispatch();
+  const [showNotification, setShowNotification] = useState(false);
   const handleAddItem = (product) => {
     dispatch(addItem(product));
-    alert("Added to cart");
+    setShowNotification(true);
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 2000);
   };
   return (
     <>
@@ -42,6 +48,7 @@ const ProductCard = (props) => {
             Add to Cart
           </button>
         </div>
+        <CartNotification isVisible={showNotification} />
       </div>
     </>
   );
