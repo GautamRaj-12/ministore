@@ -51,7 +51,7 @@ const Cart = () => {
           </div>
           <div className="flex justify-center mt-5">
             <button
-              className="flex justify-center p-2 rounded w-30 bg-rose-500/90"
+              className="flex justify-center p-2 font-semibold rounded w-30 bg-rose-500/90 dark:text-slate-100 text-slate-950"
               onClick={handleCheckoutClick}
             >
               Checkout

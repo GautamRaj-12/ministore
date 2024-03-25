@@ -9,7 +9,7 @@ const Products = () => {
   const [searchText, setSearchText] = useState("");
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const totalPages = products.length / 10;
+  const totalPages = products?.length / 10;
   // const [debounceCounter, setDebounceCounter] = useState(0);
 
   const debouncedSearchText = useDebounce(searchText, 500); // Debounce the search text
@@ -38,7 +38,7 @@ const Products = () => {
   const selectPageHandler = (selectedPage) => {
     if (
       selectedPage >= 1 &&
-      selectedPage <= products.length / 10 &&
+      selectedPage <= products?.length / 10 &&
       selectedPage !== page
     ) {
       setPage(selectedPage);
@@ -60,7 +60,7 @@ const Products = () => {
       <section className="w-[90%] mx-auto">
         <h2 className="mb-8 text-6xl font-bold text-center">Products</h2>
         <div className="grid grid-cols-1 gap-2 shadow-lg md:grid-cols-4 sm:grid-cols-2">
-          {displayedProducts.length > 0
+          {displayedProducts?.length > 0
             ? displayedProducts
                 .slice(page * 10 - 10, page * 10)
                 .map((product) => (
@@ -81,7 +81,7 @@ const Products = () => {
       </section>
       <section className="w-[90%] mx-auto">
         <div className="flex justify-center mt-4 mb-2">
-          {products.length > 0 && (
+          {products?.length > 0 && (
             <div className="flex gap-4 text-xl">
               <span
                 onClick={() => selectPageHandler(page - 1)}
@@ -90,7 +90,7 @@ const Products = () => {
                 ◀
               </span>
 
-              {[...Array(products.length / 10)].map((_, i) => {
+              {[...Array(products?.length / 10)].map((_, i) => {
                 return (
                   <span
                     key={i}
@@ -107,7 +107,7 @@ const Products = () => {
               <span
                 onClick={() => selectPageHandler(page + 1)}
                 className={
-                  page < products.length / 10 ? "cursor-pointer" : "opacity-0"
+                  page < products?.length / 10 ? "cursor-pointer" : "opacity-0"
                 }
               >
                 ▶
