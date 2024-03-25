@@ -1,19 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import { useState } from "react";
+import { clearCart } from "../../app/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
   const [modalOpen, setModalOpen] = useState(false);
 
+  const dispatch = useDispatch();
   const handleCheckoutClick = () => {
     setModalOpen(true);
   };
 
   const closeModal = () => {
     setModalOpen(false);
+    dispatch(clearCart());
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
 
   return (
@@ -26,6 +33,14 @@ const Cart = () => {
             <p>{cartItems.length}</p>
           </span>
         </div>
+        {cartItems.length > 0 && (
+          <button
+            className="px-2 py-1 ml-5 font-medium rounded-sm bg-rose-500/90 dark:text-slate-200"
+            onClick={handleClearCart}
+          >
+            Clear Cart
+          </button>
+        )}
       </div>
 
       {cartItems.length <= 0 ? (
