@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { addItem } from "../../app/cartSlice";
 import { useDispatch } from "react-redux";
+
 const ProductCard = (props) => {
   const dispatch = useDispatch();
   const handleAddItem = (product) => {
@@ -35,7 +36,7 @@ const ProductCard = (props) => {
         <div className="flex items-center justify-between">
           <div className="text-xl font-semibold text-center text-rose-500">{`$${props.price}`}</div>
           <button
-            className="flex justify-center p-2 rounded w-30 bg-rose-500/90"
+            className="flex justify-center p-2 font-semibold rounded w-30 bg-rose-500/90 dark:text-slate-100 text-slate-950"
             onClick={() => handleAddItem(props)}
           >
             Add to Cart
